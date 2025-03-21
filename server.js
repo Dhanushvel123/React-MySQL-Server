@@ -3,6 +3,8 @@ const mysql=require('mysql2')
 const bodyparse=require('body-parser')
 const cors=require('cors')
 
+require('dotenv').config();
+
 const app=expres()
 const port=3002;
 
@@ -11,10 +13,10 @@ app.use(cors())
 app.use(bodyparse.json())
 // MySQL Connect
 const db=mysql.createConnection({
-    host:'localhost',
-    user:'root',
-    password:'root',
-    database:'reactMySqldb'
+    host:process.env.DB_HOST,
+    user:process.env.DB_USER,
+    password:process.env.DB_PASSWORD,
+    database:process.env.DB_NAME
 })
 db.connect((err)=>{
     if(err) throw err;
@@ -40,7 +42,7 @@ app.post("/addpost",(req,res)=>{
         console.log(result);
     })
 })
-// getpostsx    
+// getposts    
 app.get("/getpost",(req,res)=>{
     let sql='select * from post';
     db.query(sql,(err,results)=>{ 
