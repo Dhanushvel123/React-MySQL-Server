@@ -6,7 +6,7 @@ const cors=require('cors')
 require('dotenv').config();
 
 const app=expres()
-const port=3002;
+const port= process.env.DB_PORT || 3306;
 
 // Middleware
 app.use(cors())
