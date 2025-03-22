@@ -12,15 +12,16 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // MySQL Database Connection
-const db = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    port: 3306, // MySQL default port
-    ssl: { rejectUnauthorized: true } // Fix SSL issue for cloud databases
-});
+// const db = mysql.createConnection({
+//     host: process.env.DB_HOST,
+//     user: process.env.DB_USER,
+//     password: process.env.DB_PASSWORD,
+//     database: process.env.DB_NAME,
+//     port: 3306, // MySQL default port
+//     ssl: { rejectUnauthorized: true } // Fix SSL issue for cloud databases
+// });
 
+const db=mysql.createConnection(process.env.MYSQL_URL);
 // Connect to MySQL
 db.connect((err) => {
     if (err) {
